@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alarm_default_title">Напоминание</string>
+    <string name="alarm_default_body">Напоминание сработало</string>
+    <string name="alarm_dismiss">Завершить</string>
+</resources>

@@ -45,14 +45,14 @@ class AlarmReminderRequest {
     required this.triggerAt,
     required this.title,
     required this.body,
-    this.dismissLabel = 'Dismiss',
+    this.dismissLabel,
   });
 
   final int id;
   final DateTime triggerAt;
   final String title;
   final String body;
-  final String dismissLabel;
+  final String? dismissLabel;
 
   Map<String, Object?> toMap() {
     return <String, Object?>{
@@ -60,7 +60,8 @@ class AlarmReminderRequest {
       'triggerAtMillis': triggerAt.millisecondsSinceEpoch,
       'title': title,
       'body': body,
-      'dismissLabel': dismissLabel,
+      if (dismissLabel != null && dismissLabel!.isNotEmpty)
+        'dismissLabel': dismissLabel,
     };
   }
 }

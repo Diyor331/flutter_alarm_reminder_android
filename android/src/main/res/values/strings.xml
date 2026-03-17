@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alarm_default_title">Alarm reminder</string>
+    <string name="alarm_default_body">Reminder fired</string>
+    <string name="alarm_dismiss">Dismiss</string>
+</resources>

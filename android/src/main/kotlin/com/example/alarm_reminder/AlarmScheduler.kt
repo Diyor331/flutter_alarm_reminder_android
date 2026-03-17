@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
+import androidx.annotation.StringRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
@@ -79,12 +80,18 @@ object AlarmScheduler {
         createNotificationChannel(context)
         AlarmRingingController.start(context)
 
+        val title = payload.title.ifBlank { localizedString(context, R.string.alarm_default_title) }
+        val body = payload.body.ifBlank { localizedString(context, R.string.alarm_default_body) }
+        val dismissLabel = payload.dismissLabel?.ifBlank { null }
+            ?: localizedString(context, R.string.alarm_dismiss)
+
         val fullScreenIntent = Intent(context, AlarmActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             putExtra("id", payload.id)
-            putExtra("title", payload.title)
-            putExtra("body", payload.body)
-            putExtra("dismissLabel", payload.dismissLabel)
+            putExtra("title", title)
+            putExtra("body", body)
+            putExtra("dismissLabel", dismissLabel)
+            putExtra("triggerAtMillis", payload.triggerAtMillis)
         }
         val dismissIntent = Intent(context, AlarmActionReceiver::class.java).apply {
             action = actionDismissAlarm
@@ -106,8 +113,8 @@ object AlarmScheduler {
 
         val notification = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
-            .setContentTitle(payload.title)
-            .setContentText(payload.body)
+            .setContentTitle(title)
+            .setContentText(body)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setOngoing(true)
@@ -116,7 +123,7 @@ object AlarmScheduler {
             .setVisibility(Notification.VISIBILITY_PUBLIC)
             .setFullScreenIntent(fullScreenPendingIntent, true)
             .setContentIntent(fullScreenPendingIntent)
-            .addAction(0, payload.dismissLabel, dismissPendingIntent)
+            .addAction(0, dismissLabel, dismissPendingIntent)
             .build()
 
         NotificationManagerCompat.from(context).notify(notificationId(payload.id), notification)
@@ -183,7 +190,7 @@ object AlarmScheduler {
             triggerAtMillis = intent.getLongExtra("triggerAtMillis", 0L),
             title = intent.getStringExtra("title").orEmpty(),
             body = intent.getStringExtra("body").orEmpty(),
-            dismissLabel = intent.getStringExtra("dismissLabel") ?: "Dismiss",
+            dismissLabel = intent.getStringExtra("dismissLabel"),
         )
     }
 
@@ -210,8 +217,12 @@ object AlarmScheduler {
         triggerAtMillis = 0L,
         title = "",
         body = "",
-        dismissLabel = "Dismiss",
+        dismissLabel = null,
     )
 
     private fun notificationId(id: Int) = notificationOffset + id
+
+    private fun localizedString(context: Context, @StringRes resId: Int): String {
+        return context.getString(resId)
+    }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alarm_default_title">Recordatorio de alarma</string>
+    <string name="alarm_default_body">El recordatorio se activó</string>
+    <string name="alarm_dismiss">Finalizar</string>
+</resources>

@@ -7,7 +7,7 @@ data class AlarmPayload(
     val triggerAtMillis: Long,
     val title: String,
     val body: String,
-    val dismissLabel: String,
+    val dismissLabel: String?,
 ) {
     fun toJson(): String {
         return JSONObject()
@@ -37,7 +37,7 @@ data class AlarmPayload(
                 triggerAtMillis = json.getLong("triggerAtMillis"),
                 title = json.getString("title"),
                 body = json.getString("body"),
-                dismissLabel = json.optString("dismissLabel", "Dismiss"),
+                dismissLabel = json.optString("dismissLabel").ifBlank { null },
             )
         }
 
@@ -50,7 +50,7 @@ data class AlarmPayload(
                 ?: throw IllegalArgumentException("title is required")
             val body = map["body"] as String?
                 ?: throw IllegalArgumentException("body is required")
-            val dismissLabel = map["dismissLabel"] as String? ?: "Dismiss"
+            val dismissLabel = (map["dismissLabel"] as String?)?.ifBlank { null }
 
             return AlarmPayload(
                 id = id,

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alarm_default_title">Lembrete de alarme</string>
+    <string name="alarm_default_body">O lembrete foi acionado</string>
+    <string name="alarm_dismiss">Concluir</string>
+</resources>
