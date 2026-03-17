@@ -2,54 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#17180F"
-    android:gravity="center"
+    android:background="#000000"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingHorizontal="32dp"
-    android:paddingVertical="40dp">
+    android:paddingStart="24dp"
+    android:paddingTop="96dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="40dp">
 
-    <TextView
-        android:id="@+id/alarmSubtitle"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.72"
         android:gravity="center"
-        android:textColor="#F6F1DE"
-        android:textSize="18sp" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/alarmIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_alarm_header" />
+
+        <TextView
+            android:id="@+id/alarmTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/alarmTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="38dp"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:letterSpacing="-0.03"
-        android:textColor="#FFFDF7"
-        android:textSize="72sp"
+        android:letterSpacing="-0.05"
+        android:textColor="#F4F4F4"
+        android:textSize="84sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/alarmTitle"
+        android:id="@+id/alarmSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="38dp"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:textColor="#FFF7E5"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textColor="#5E5E5E"
+        android:textSize="16sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/dismissButton"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginTop="48dp"
-        android:backgroundTint="#FFD98B"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/bg_alarm_dismiss_button"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:minWidth="164dp"
-        android:paddingHorizontal="28dp"
+        android:paddingHorizontal="24dp"
         android:textAllCaps="false"
-        android:textColor="#5E4212"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 </LinearLayout>
