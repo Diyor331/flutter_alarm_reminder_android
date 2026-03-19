@@ -11,7 +11,7 @@
     android:paddingBottom="40dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
@@ -25,12 +25,20 @@
 
         <TextView
             android:id="@+id/alarmTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:maxLines="3"
             android:textColor="#FFFFFF"
             android:textSize="28sp" />
+
+        <Space
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
     </LinearLayout>
 
     <TextView
