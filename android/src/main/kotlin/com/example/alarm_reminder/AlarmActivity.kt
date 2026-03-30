@@ -31,15 +31,6 @@ class AlarmActivity : ComponentActivity() {
 
         setContentView(R.layout.activity_alarm)
 
-        val root = findViewById<View>(R.id.alarmRoot)
-        val basePaddingBottom = root.paddingBottom
-        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
-            val sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(v.paddingLeft, v.paddingTop, v.paddingRight, basePaddingBottom + sysBars.bottom)
-            insets
-        }
-        ViewCompat.requestApplyInsets(root)
-
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title").orEmpty().ifBlank {
             getString(R.string.alarm_default_title)
