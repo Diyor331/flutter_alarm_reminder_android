@@ -8,6 +8,8 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import java.util.Date
 
 class AlarmActivity : ComponentActivity() {
@@ -28,6 +30,15 @@ class AlarmActivity : ComponentActivity() {
         }
 
         setContentView(R.layout.activity_alarm)
+
+        val root = findViewById<View>(R.id.alarmRoot)
+        val basePaddingBottom = root.paddingBottom
+        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
+            val sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(v.paddingLeft, v.paddingTop, v.paddingRight, basePaddingBottom + sysBars.bottom)
+            insets
+        }
+        ViewCompat.requestApplyInsets(root)
 
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title").orEmpty().ifBlank {
